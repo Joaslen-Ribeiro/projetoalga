@@ -1,7 +1,8 @@
 package com.algaworks.algalog.domain.model;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+
+import java.time.OffsetDateTime;
 
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -52,11 +53,11 @@ public class Entrega {
 	private StatusEntrega status;
 	
 	@JsonProperty(access= Access.READ_ONLY)
-	private LocalDateTime dataPedido;
+	private OffsetDateTime dataPedido;
 	
 	
 	@JsonProperty(access= Access.READ_ONLY)    // só leitura // pra evitar que o consumidor coloque uma data por conta propria
-	private LocalDateTime finalizacao;
+	private OffsetDateTime finalizacao;
 	
 	
 	
@@ -102,21 +103,23 @@ public class Entrega {
 		this.status = status;
 	}
 
-	public LocalDateTime getDataPedido() {
+	public OffsetDateTime getDataPedido() {
 		return dataPedido;
 	}
 
-	public void setDataPedido(LocalDateTime dataPedido) {
+	public void setDataPedido(OffsetDateTime dataPedido) {
 		this.dataPedido = dataPedido;
 	}
 
-	public LocalDateTime getFinalizacao() {
+	public OffsetDateTime getFinalizacao() {
 		return finalizacao;
 	}
 
-	public void setFinalizacao(LocalDateTime finalizacao) {
+	public void setFinalizacao(OffsetDateTime finalizacao) {
 		this.finalizacao = finalizacao;
 	}
+
+	
 	
 	
 	

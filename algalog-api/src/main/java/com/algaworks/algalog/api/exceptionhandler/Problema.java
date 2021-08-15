@@ -1,6 +1,7 @@
 package com.algaworks.algalog.api.exceptionhandler;
 
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -14,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 public class Problema {
 	
 	private Integer status;
-	private LocalDateTime datahora;
+	private OffsetDateTime datahora;
 	private String titulo;
 	
 	private List<Campo> campos;
@@ -57,10 +58,11 @@ public class Problema {
 	public void setStatus(Integer status) {
 		this.status = status;
 	}
-	public LocalDateTime getDatahora() {
+	
+	public OffsetDateTime getDatahora() {
 		return datahora;
 	}
-	public void setDatahora(LocalDateTime datahora) {
+	public void setDatahora(OffsetDateTime datahora) {
 		this.datahora = datahora;
 	}
 	public String getTitulo() {

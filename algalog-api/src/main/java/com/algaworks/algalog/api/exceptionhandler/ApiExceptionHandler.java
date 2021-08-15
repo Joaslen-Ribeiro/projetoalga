@@ -1,6 +1,7 @@
 package com.algaworks.algalog.api.exceptionhandler;
 
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,7 +48,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 		
 	Problema problema = new Problema();   // criaçao do objeto pra mostrar uma mensagem ao consumidor da API
 	problema.setStatus(status.value());
-	problema.setDatahora(LocalDateTime.now());
+	problema.setDatahora(OffsetDateTime.now());
 	problema.setTitulo("um ou mais campos estão invalidos. Faça o preenchimento correto! ");
 	problema.setCampos(campos);
 	
@@ -61,7 +62,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 		
 		Problema problema = new Problema();   // criaçao do objeto pra mostrar uma mensagem ao consumidor da API
 		problema.setStatus(status.value());
-		problema.setDatahora(LocalDateTime.now());
+		problema.setDatahora(OffsetDateTime.now());
 		problema.setTitulo(ex.getMessage());
 		
 		
