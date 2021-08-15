@@ -3,11 +3,14 @@ package com.algaworks.algalog.api.exceptionhandler;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import lombok.Getter;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
+
 
 //@Getter
 //@Setter
+@JsonInclude(Include.NON_NULL)  // iclui os que nao estiverem com o campo nuul
 public class Problema {
 	
 	private Integer status;

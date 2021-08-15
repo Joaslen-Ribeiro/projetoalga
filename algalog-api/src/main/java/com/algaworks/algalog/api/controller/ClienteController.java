@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.algaworks.algalog.domain.model.Cliente;
 import com.algaworks.algalog.domain.repository.ClienteRepository;
+import com.algaworks.algalog.domain.service.CatalogoClienteService;
 
 import lombok.AllArgsConstructor;
 
@@ -30,9 +31,13 @@ import lombok.AllArgsConstructor;
 public class ClienteController {
 
 	
+	
+	
 	@Autowired
 	private ClienteRepository clienteRepository;
 	
+	@Autowired
+	private CatalogoClienteService catalogoClienteService;
 	
 	
 	@GetMapping
@@ -59,17 +64,22 @@ public class ClienteController {
 	@PostMapping             //@Valid nao vai deixar entrar na variavel vai anular se algum atributo tiver nulo 
 	@ResponseStatus(HttpStatus.CREATED)    // é pra dar o status 201 que criou a requisiçao que foi feita
 	public Cliente adicionar(@Valid @RequestBody Cliente cliente) { // vai vincular o parametro do metodo a o corpo da requisiçao ou seja todos os atributos que estiverem na variavel 
-		return clienteRepository.save(cliente);
+	//	return clienteRepository.save(cliente);
+		return catalogoClienteService.salvar(cliente);
+	
 	}
 	
 	@PutMapping("/{clienteId}")
 	public ResponseEntity<Cliente> atualizar (@PathVariable Long clienteId,@Valid @RequestBody Cliente cliente){ // @anotaçao é pra mostrar o caminho da variavel pode ser que nao exista
 		if(!clienteRepository.existsById(clienteId)) {
-			return ResponseEntity.notFound().build(); // se ele nao existir nao tem como atualizar = not found
+		return ResponseEntity.notFound().build(); // se ele nao existir nao tem como atualizar = not found
+
 		}
 		  cliente.setId(clienteId);	   // forçando o cliente a ter um ID se nao ele cria um novo, no lugar de atualizar
-		  cliente = clienteRepository.save(cliente);
-		return ResponseEntity.ok(cliente);
+		//  cliente = clienteRepository.save(cliente);
+		cliente= catalogoClienteService.salvar(cliente);
+		  
+		  return ResponseEntity.ok(cliente);
 	}
 	
 	@DeleteMapping("/{clienteId}")
@@ -77,7 +87,8 @@ public class ClienteController {
 		if(!clienteRepository.existsById(clienteId)) {
 			return ResponseEntity.notFound().build(); 
 		}
-	    clienteRepository.deleteById(clienteId);
+	    //clienteRepository.deleteById(clienteId);
+	   catalogoClienteService.excluir(clienteId);
 	    return ResponseEntity.noContent().build();
 	}  
 	
